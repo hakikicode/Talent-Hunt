@@ -144,6 +144,23 @@ const Registration = () => {
                 <input type="text" name="name" id="name" {...register("name")} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" />
               </div>
               <div>
+              <label htmlFor="talentCategory" className="block mb-2 text-sm">
+                Talent Category
+              </label>
+              <select
+                name="talentCategory"
+                id="talentCategory"
+                {...register("talentCategory")}
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-blue-500 bg-gray-200 text-gray-900"
+              >
+                <option value="COMEDY">COMEDY</option>
+                <option value="MUSIC CHANTS">MUSIC CHANTS</option>
+                <option value="MODELLING">MODELLING</option>
+                <option value="ARTS">ARTS</option>
+                <option value="OTHER TALENT">OTHER TALENT</option>
+              </select>
+            </div>
+              <div>
                 <label htmlFor="gender" className="block mb-2 text-sm">Gender</label>
                 <select name="gender" id="gender" {...register("gender")} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900">
                   <option value="Male">Male</option>
@@ -158,6 +175,19 @@ const Registration = () => {
                 <label htmlFor="age" className="block mb-2 text-sm">Age</label>
                 <input type="number" name="age" id="age" {...register("age")} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" />
               </div>
+              <div>
+              <label htmlFor="school" className="block mb-2 text-sm">
+                School
+              </label>
+              <input
+                type="text"
+                name="school"
+                id="school"
+                {...register("school")}
+                placeholder="Enter School Name"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-blue-500 bg-gray-200 text-gray-900"
+              />
+            </div>
               <div>
                 <label htmlFor="stateOfOrigin" className="block mb-2 text-sm">State of Origin</label>
                 <select name="stateOfOrigin" id="stateOfOrigin" {...register("stateOfOrigin")} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900">
