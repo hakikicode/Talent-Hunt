@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import UsersTable from "../components/Table/Users/UsersTable";
+// import UsersTable from "../../components/Table/Users/UsersTable";
 
 const ManageUser = () => {
   const [users, setUsers] = useState([]);
@@ -73,7 +73,7 @@ const ManageUser = () => {
       </div>
 
       {/* Render Users Table */}
-      <UsersTable data={users} />
+      {/* <UsersTable data={users} /> */}
     </div>
   );
 };

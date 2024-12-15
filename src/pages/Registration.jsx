@@ -31,15 +31,29 @@ const Registration = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("/api/registrations", data);
-      if (response.status === 201) {
-        toast.success("Registration successful!");
-      }
-    } catch (error) {
-      toast.error(error?.response?.data?.message || "Registration failed!");
-    }
-  };
+      // Fetch existing data from localStorage
+      const existingData = JSON.parse(localStorage.getItem("registrations")) || [];
   
+      // Append new submission
+      const updatedData = [...existingData, data];
+  
+      // Save updated data to localStorage
+      localStorage.setItem("registrations", JSON.stringify(updatedData));
+  
+      // Show success message
+      toast.success(
+        "Registration successful! You can check your WhatsApp group for updates."
+      );
+  
+      // Redirect to the homepage
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 2000); // Redirect after 2 seconds
+    } catch (error) {
+      console.error("Submission error:", error.message);
+      toast.error("Failed to submit registration!");
+    }
+  };        
   
 
   const handleGoogleSignIn = async () => {
