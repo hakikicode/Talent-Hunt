@@ -7,7 +7,7 @@ import useAuth from "../hooks/useAuth";
 import { generateToken, saveUser } from "../api/apiAuth";
 import { useForm } from "react-hook-form";
 import Title from "../components/Shared/Title";
-import backgroundImage from "../components/assets/banner.png";
+import backgroundImage from "../components/assets/loginback.png";
 
 const emailVerification = /\S+@\S+\.\S+/;
 
@@ -30,74 +30,16 @@ const Registration = () => {
   const from = location.state?.from?.pathname || "/";
 
   const onSubmit = async (data) => {
-    const {
-      name,
-      gender,
-      email,
-      age,
-      school,
-      stateOfOrigin,
-      nationality,
-      talentCategory,
-      localGovernment,
-      instagramHandle,
-      facebookHandle,
-      phoneNumber,
-      stageName,
-    } = data;
-  
-    // Validation checks
-    if (
-      !name ||
-      !gender ||
-      !email ||
-      !age ||
-      !talentCategory ||
-      !school ||
-      !stateOfOrigin ||
-      !nationality ||
-      !localGovernment ||
-      !instagramHandle ||
-      !facebookHandle ||
-      !phoneNumber ||
-      !stageName
-    ) {
-      return toast.error("Please fill out all required fields.");
-    }
-  
-    if (!emailVerification.test(email)) {
-      return toast.error("Please enter a valid email");
-    }
-  
-    // Attempt Firebase registration
     try {
-      // Firebase-specific operations
-      const { user } = await createUser(email, "DefaultPassword123!");
-      await updateUserProfile(name);
-      await generateToken(user?.email);
-      await saveUser(data);
-  
-      toast.success("Firebase registration successful!");
-    } catch (error) {
-      console.error("Firebase registration failed:", error);
-      toast.error("Firebase registration failed. Proceeding with backend submission.");
-    }
-  
-    // Attempt backend registration
-    try {
-      // Backend-specific operations
-      const response = await axios.post("/registrations", data);
+      const response = await axios.post("/api/registrations", data);
       if (response.status === 201) {
-        toast.success("Backend registration successful!");
+        toast.success("Registration successful!");
       }
     } catch (error) {
-      console.error("Backend registration failed:", error);
-      toast.error("Backend registration failed.");
+      toast.error(error?.response?.data?.message || "Registration failed!");
     }
-  
-    // Navigate after submission attempts
-    navigate("/");
   };
+  
   
 
   const handleGoogleSignIn = async () => {

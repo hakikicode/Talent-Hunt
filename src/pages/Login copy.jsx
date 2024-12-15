@@ -16,20 +16,27 @@ const Login = () => {
   const from = location.state?.from?.pathname || "/";
 
   const onSubmit = async (data) => {
-    const { email, password } = data;
-  
-    try {
-      const response = await axios.post("/api/admin/login", { username: email, password });
-  
-      // Store the token in localStorage or context
-      localStorage.setItem("adminToken", response.data.token);
-  
-      toast.success("Login successful!");
-      navigate("/admin-dashboard");
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Invalid credentials");
+    const email = data.email;
+    const password = data.password;
+
+    if (!email || !password) {
+      return toast.error("Missing required fields.");
     }
-  };  
+
+    try {
+      // create account
+      const { user } = await signIn(email, password);
+
+      // create token
+      await generateToken(user?.email);
+
+      toast.success("Login successful!");
+      navigate(from, { replace: true });
+    } catch (error) {
+      toast.error(error?.message || "Something went wrong!");
+      setLoading(false);
+    }
+  };
 
   const handleGoogleSignIn = async () => {
     try {
