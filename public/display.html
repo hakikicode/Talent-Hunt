@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registrations</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.27/jspdf.plugin.autotable.min.js"></script>
   <style>
     table {
       width: 100%;
@@ -21,7 +19,7 @@
       background-color: #f2f2f2;
     }
     button {
-      margin: 10px 5px;
+      margin: 10px 0;
       padding: 8px 16px;
       background-color: #4CAF50;
       color: white;
@@ -35,7 +33,7 @@
 </head>
 <body>
   <h1>Registration Data</h1>
-  <table id="registrations-table" border="1">
+  <table id="registrations-table">
     <thead>
       <tr>
         <th>Name</th>
@@ -55,10 +53,47 @@
     </thead>
     <tbody id="registrations-body"></tbody>
   </table>
-  <br />
+  <br>
   <button onclick="downloadCSV()">Download CSV</button>
   <button onclick="downloadExcel()">Download Excel</button>
-  <button onclick="downloadPDF()">Download PDF</button>
-  <script src="display.js"></script>
+
+  <script>
+    // Fetch data from localStorage
+    const data = JSON.parse(localStorage.getItem("registrations")) || [];
+    const tableBody = document.getElementById("registrations-body");
+
+    // Populate the table
+    data.forEach((entry) => {
+      const row = document.createElement("tr");
+      Object.values(entry).forEach((value) => {
+        const cell = document.createElement("td");
+        cell.textContent = value;
+        row.appendChild(cell);
+      });
+      tableBody.appendChild(row);
+    });
+
+    // Download as CSV
+    function downloadCSV() {
+      const csvContent = data
+        .map((entry) => Object.values(entry).join(","))
+        .join("\n");
+      const csvHeader =
+        "Name,Gender,Email,Age,School,State of Origin,Nationality,Talent Category,Local Government,Instagram Handle,Facebook Handle,Phone Number,Stage Name\n";
+      const blob = new Blob([csvHeader + csvContent], { type: "text/csv" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "registrations.csv";
+      link.click();
+    }
+
+    // Download as Excel
+    function downloadExcel() {
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.json_to_sheet(data);
+      XLSX.utils.book_append_sheet(wb, ws, "Registrations");
+      XLSX.writeFile(wb, "registrations.xlsx");
+    }
+  </script>
 </body>
 </html>
