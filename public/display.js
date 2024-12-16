@@ -1,21 +1,27 @@
-// Fetch data from db.json located in the public directory
+// Firebase Realtime Database URL
+const FIREBASE_URL = "https://talenthunt-e6d1e-default-rtdb.firebaseio.com/registrations.json";
+
+// Fetch data from Firebase
 const fetchData = async () => {
   try {
-    const response = await fetch("/db.json");
-    if (!response.ok) {
-      throw new Error("Failed to fetch data from db.json");
-    }
+    const response = await fetch(FIREBASE_URL);
     const data = await response.json();
-    populateTable(data);
+
+    if (data) {
+      const formattedData = Object.values(data); // Convert Firebase object to array
+      populateTable(formattedData); // Populate table with fetched data
+    } else {
+      console.warn("No data found in Firebase");
+    }
   } catch (error) {
-    console.error("Error fetching data:", error.message);
+    console.error("Failed to fetch data:", error.message);
   }
 };
 
-// Populate the HTML table with the data
+// Populate the table with data
 const populateTable = (data) => {
   const tableBody = document.getElementById("registrations-body");
-  tableBody.innerHTML = ""; // Clear any existing rows
+  tableBody.innerHTML = ""; // Clear existing rows
 
   data.forEach((entry) => {
     const row = document.createElement("tr");
@@ -62,23 +68,5 @@ const downloadExcel = () => {
   XLSX.writeFile(workbook, "registrations.xlsx");
 };
 
-// Download as PDF
-const downloadPDF = () => {
-  const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF();
-  const table = document.querySelector("#registrations-table");
-
-  const rows = Array.from(table.rows).map((row) =>
-    Array.from(row.cells).map((cell) => cell.textContent)
-  );
-
-  pdf.autoTable({
-    head: [rows[0]], // The first row is the table header
-    body: rows.slice(1), // The rest are the table body
-  });
-
-  pdf.save("registrations.pdf");
-};
-
-// Fetch data on page load
+// Fetch data on load
 fetchData();
