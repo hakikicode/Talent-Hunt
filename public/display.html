@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Registrations</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <style>
@@ -33,7 +33,7 @@
 </head>
 <body>
   <h1>Registration Data</h1>
-  <table id="registrations-table">
+  <table id="registrations-table" border="1">
     <thead>
       <tr>
         <th>Name</th>
@@ -53,47 +53,73 @@
     </thead>
     <tbody id="registrations-body"></tbody>
   </table>
-  <br>
+  <br />
   <button onclick="downloadCSV()">Download CSV</button>
   <button onclick="downloadExcel()">Download Excel</button>
 
-  <script>
-    // Fetch data from localStorage
-    const data = JSON.parse(localStorage.getItem("registrations")) || [];
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+  
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDRbvwZQJSRPXeQW9JkPTi7EZZ3a6wRwYg",
+      authDomain: "talenthunt-e6d1e.firebaseapp.com",
+      databaseURL: "https://talenthunt-e6d1e-default-rtdb.firebaseio.com/",
+      projectId: "talenthunt-e6d1e",
+      storageBucket: "talenthunt-e6d1e.firebasestorage.app",
+      messagingSenderId: "8652169622",
+      appId: "1:8652169622:web:fed5cdc93e95bc279c3db7",
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+  
+    // Fetch and display data
     const tableBody = document.getElementById("registrations-body");
-
-    // Populate the table
-    data.forEach((entry) => {
-      const row = document.createElement("tr");
-      Object.values(entry).forEach((value) => {
-        const cell = document.createElement("td");
-        cell.textContent = value;
-        row.appendChild(cell);
+    const dbRef = ref(db, "registrations");
+  
+    onValue(dbRef, (snapshot) => {
+      const data = snapshot.val();
+      tableBody.innerHTML = ""; // Clear existing rows
+  
+      Object.values(data).forEach((entry) => {
+        const row = document.createElement("tr");
+        Object.values(entry).forEach((value) => {
+          const cell = document.createElement("td");
+          cell.textContent = value;
+          row.appendChild(cell);
+        });
+        tableBody.appendChild(row);
       });
-      tableBody.appendChild(row);
     });
-
+  
     // Download as CSV
     function downloadCSV() {
-      const csvContent = data
-        .map((entry) => Object.values(entry).join(","))
+      const csvContent = Array.from(tableBody.rows)
+        .map((row) =>
+          Array.from(row.cells)
+            .map((cell) => `"${cell.textContent}"`)
+            .join(",")
+        )
         .join("\n");
-      const csvHeader =
-        "Name,Gender,Email,Age,School,State of Origin,Nationality,Talent Category,Local Government,Instagram Handle,Facebook Handle,Phone Number,Stage Name\n";
-      const blob = new Blob([csvHeader + csvContent], { type: "text/csv" });
+  
+      const blob = new Blob([csvContent], { type: "text/csv" });
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
       link.download = "registrations.csv";
       link.click();
     }
-
+  
     // Download as Excel
     function downloadExcel() {
       const wb = XLSX.utils.book_new();
-      const ws = XLSX.utils.json_to_sheet(data);
+      const ws = XLSX.utils.table_to_sheet(document.getElementById("registrations-table"));
       XLSX.utils.book_append_sheet(wb, ws, "Registrations");
       XLSX.writeFile(wb, "registrations.xlsx");
     }
-  </script>
+  </script>  
+  <script src="display.js" defer></script>
 </body>
 </html>
