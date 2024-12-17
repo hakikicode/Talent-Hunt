@@ -33,31 +33,19 @@ const Registration = () => {
   const from = location.state?.from?.pathname || "/";
 
   const onSubmit = async (data) => {
-    try {
-      // Fetch existing data from localStorage
-      const existingData = JSON.parse(localStorage.getItem("registrations")) || [];
-  
-      // Append new submission
-      const updatedData = [...existingData, data];
-  
-      // Save updated data to localStorage
-      localStorage.setItem("registrations", JSON.stringify(updatedData));
-  
-      // Show success message
-      toast.success(
-        "Registration successful! You can check your WhatsApp group for updates."
-      );
-  
-      // Redirect to the homepage
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 2000); // Redirect after 2 seconds
-    } catch (error) {
-      console.error("Submission error:", error.message);
-      toast.error("Failed to submit registration!");
-    }
-  };        
-  
+  try {
+    const dbRef = ref(database, "registrations");
+    await push(dbRef, data);
+
+    toast.success("Registration successful! Check your WhatsApp group for updates.");
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 2000);
+  } catch (error) {
+    console.error("Submission error:", error.message);
+    toast.error("Failed to submit registration!");
+  }
+};        
 
   const handleGoogleSignIn = async () => {
     try {
