@@ -9,6 +9,9 @@ import { useForm } from "react-hook-form";
 import Title from "../components/Shared/Title";
 import backgroundImage from "../components/assets/loginback.png";
 
+import { getDatabase, ref, push } from "firebase/database";
+import { database } from "../firebase/firebase.config";
+
 const emailVerification = /\S+@\S+\.\S+/;
 
 const statesOfNigeria = [
