@@ -76,8 +76,8 @@ const Registration = () => {
       <div className="flex justify-center items-center">
         <div className="flex flex-col max-w-2xl p-8 rounded-md sm:p-10 bg-white shadow-lg">
           <div className="mb-8 text-center">
-            <h1 className="my-3 text-4xl font-bold">Kwara Talents Harvest season 5</h1>
-            <p className="text-sm text-gray-400">Register and Unleash Your Talents To The World, Join our WhatsApp Group <p><a href='https://chat.whatsapp.com/JxvKM5xasmuFOpD5zJWvWU' className='text-blue-500 underline'>https://chat.whatsapp.com/JxvKM5xasmuFOpD5zJWvWU</a></p> to get updates on Kwara Talents Harvest Seasons</p>
+            <h1 className="my-3 text-6xl font-bold">Kwara Talents Harvest season 5</h1>
+            <p className="text-5xl text-gray-400 font-bold">Register and Unleash Your Talents To The World, Join our WhatsApp Group <p><a href='https://chat.whatsapp.com/JxvKM5xasmuFOpD5zJWvWU' className='text-blue-500 underline font-bold'>https://chat.whatsapp.com/JxvKM5xasmuFOpD5zJWvWU</a></p> to get updates on Kwara Talents Harvest Seasons</p>
           </div>
 
           <form
@@ -87,9 +87,19 @@ const Registration = () => {
           >
             <div className="space-y-4">
               <div>
-                <label htmlFor="name" className="block mb-2 text-sm">Name</label>
-                <input type="text" name="name" id="name" {...register("name")} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" />
+            <label htmlFor="name" className="block mb-2 text-sm">
+              Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              {...register("name", { required: true })}
+              className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900"
+              required
+            />
               </div>
+
               <div>
               <label htmlFor="talentCategory" className="block mb-2 text-sm">
                 Talent Category
@@ -97,8 +107,8 @@ const Registration = () => {
               <select
                 name="talentCategory"
                 id="talentCategory"
-                {...register("talentCategory")}
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-blue-500 bg-gray-200 text-gray-900"
+                {...register("talentCategory", { required: true })}
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-blue-500 bg-gray-200 text-gray-900" required
               >
                 <option value="COMEDY">COMEDY</option>
                 <option value="MUSIC CHANTS">MUSIC CHANTS</option>
@@ -109,18 +119,18 @@ const Registration = () => {
             </div>
               <div>
                 <label htmlFor="gender" className="block mb-2 text-sm">Gender</label>
-                <select name="gender" id="gender" {...register("gender")} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900">
+                <select name="gender" id="gender" {...register("gender", { required: true })} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" required>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
               </div>
               <div>
                 <label htmlFor="email" className="block mb-2 text-sm">Email</label>
-                <input type="email" name="email" id="email" {...register("email")} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" />
+                <input type="email" name="email" id="email" {...register("email")} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" required/>
               </div>
               <div>
                 <label htmlFor="age" className="block mb-2 text-sm">Age</label>
-                <input type="number" name="age" id="age" {...register("age")} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" />
+                <input type="number" name="age" id="age" {...register("age", { required: true })} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" required/>
               </div>
               <div>
               <label htmlFor="school" className="block mb-2 text-sm">
@@ -130,14 +140,14 @@ const Registration = () => {
                 type="text"
                 name="school"
                 id="school"
-                {...register("school")}
+                {...register("school", { required: true })}
                 placeholder="Enter School Name"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-blue-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-blue-500 bg-gray-200 text-gray-900" required
               />
             </div>
               <div>
                 <label htmlFor="stateOfOrigin" className="block mb-2 text-sm">State of Origin</label>
-                <select name="stateOfOrigin" id="stateOfOrigin" {...register("stateOfOrigin")} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900">
+                <select name="stateOfOrigin" id="stateOfOrigin" {...register("stateOfOrigin", { required: true })} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900">
                   {statesOfNigeria.map((state) => (
                     <option key={state} value={state}>{state}</option>
                   ))}
@@ -145,27 +155,27 @@ const Registration = () => {
               </div>
               <div>
                 <label htmlFor="localGovernment" className="block mb-2 text-sm">Local Government</label>
-                <input type="text" name="localGovernment" id="localGovernment" {...register("localGovernment")} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" />
+                <input type="text" name="localGovernment" id="localGovernment" {...register("localGovernment", { required: true })} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" />
               </div>
               <div>
                 <label htmlFor="nationality" className="block mb-2 text-sm">Nationality</label>
-                <input type="text" name="nationality" id="nationality" {...register("nationality")} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" />
+                <input type="text" name="nationality" id="nationality" {...register("nationality", { required: true })} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" />
               </div>
               <div>
                 <label htmlFor="instagramHandle" className="block mb-2 text-sm">Instagram Handle</label>
-                <input type="text" name="instagramHandle" id="instagramHandle" {...register("instagramHandle")} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" />
+                <input type="text" name="instagramHandle" id="instagramHandle" {...register("instagramHandle", { required: true })} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" />
               </div>
               <div>
                 <label htmlFor="facebookHandle" className="block mb-2 text-sm">Facebook Handle</label>
-                <input type="text" name="facebookHandle" id="facebookHandle" {...register("facebookHandle")} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" />
+                <input type="text" name="facebookHandle" id="facebookHandle" {...register("facebookHandle", { required: true })} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" />
               </div>
               <div>
                 <label htmlFor="phoneNumber" className="block mb-2 text-sm">Active Phone Number</label>
-                <input type="text" name="phoneNumber" id="phoneNumber" {...register("phoneNumber")} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" />
+                <input type="text" name="phoneNumber" id="phoneNumber" {...register("phoneNumber", { required: true })} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" required/>
               </div>
               <div>
                 <label htmlFor="stageName" className="block mb-2 text-sm">Stage Name</label>
-                <input type="text" name="stageName" id="stageName" {...register("stageName")} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" />
+                <input type="text" name="stageName" id="stageName" {...register("stageName", { required: true })} className="w-full px-3 py-2 border rounded-md bg-gray-200 text-gray-900" required/>
               </div>
             </div>
             <div>
