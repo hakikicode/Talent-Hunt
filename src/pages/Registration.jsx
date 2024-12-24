@@ -76,8 +76,8 @@ const Registration = () => {
       <div className="flex justify-center items-center">
         <div className="flex flex-col max-w-2xl p-8 rounded-md sm:p-10 bg-white shadow-lg">
           <div className="mb-8 text-center">
-            <h1 className="my-3 text-6xl font-bold">Kwara Talents Harvest season 5</h1>
-            <p className="text-5xl text-gray-400 font-bold">Register and Unleash Your Talents To The World, Join our WhatsApp Group <p><a href='https://chat.whatsapp.com/JxvKM5xasmuFOpD5zJWvWU' className='text-blue-500 underline font-bold'>https://chat.whatsapp.com/JxvKM5xasmuFOpD5zJWvWU</a></p> to get updates on Kwara Talents Harvest Seasons</p>
+            <h1 className="my-3 text-5xl font-bold">Kwara Talents Harvest season 5</h1>
+            <p className="text-3xl text-gray-400 font-bold">Register and Unleash Your Talents To The World, Join our WhatsApp Group <p><a href='https://chat.whatsapp.com/JxvKM5xasmuFOpD5zJWvWU' className='text-blue-500 underline font-bold'>https://chat.whatsapp.com/JxvKM5xasmuFOpD5zJWvWU</a></p> to get updates on Kwara Talents Harvest Seasons</p>
           </div>
 
           <form
