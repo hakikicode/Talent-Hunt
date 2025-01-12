@@ -45,8 +45,8 @@ const Registration = () => {
     console.error("Submission error:", error.message);
     toast.error("Failed to submit registration!");
   }
-};        
-
+};
+  
   const handleGoogleSignIn = async () => {
     try {
       const { user } = await signInWithGoogle();
@@ -65,19 +65,39 @@ const Registration = () => {
   };
 
   return (
-    <div className="min-h-screen py-10 bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div
+      className="min-h-screen py-10 bg-cover bg-center"
+      style={{ backgroundImage: `url(${backgroundImage})` }}
+    >
       <Title title="Registration | Kwara Talents Harvest" />
-      <header className="bg-white-800 text-red py-4">
-        <nav className="max-w-7xl mx-auto px-4 flex justify-between">
-          <h1 className="text-2xl font-bold">Kwara Talents Harvest</h1>
-          <Link to="/" className="hover:underline font-bold">Home</Link>
+      <header className="bg-white shadow-md text-red py-4">
+        <nav className="max-w-7xl mx-auto px-4 flex justify-between items-center">
+          <h1 className="text-lg sm:text-2xl font-bold">
+            Kwara Talents Harvest
+          </h1>
+          <Link to="/" className="hover:underline font-bold">
+            Home
+          </Link>
         </nav>
       </header>
-      <div className="flex justify-center items-center">
-        <div className="flex flex-col max-w-2xl p-8 rounded-md sm:p-10 bg-white shadow-lg">
+
+      <div className="flex justify-center items-center px-4">
+        <div className="flex flex-col w-full max-w-md sm:max-w-lg md:max-w-2xl p-4 sm:p-8 rounded-md bg-white shadow-lg">
           <div className="mb-8 text-center">
-            <h1 className="my-3 text-4xl font-bold">Kwara Talents Harvest season 5</h1>
-            <p className="text-1xl text-gray-400 font-bold">Register and Unleash Your Talents To The World, Join our WhatsApp Group <p><a href='https://chat.whatsapp.com/JxvKM5xasmuFOpD5zJWvWU' className='text-blue-500 underline'>https://chat.whatsapp.com/JxvKM5xasmuFOpD5zJWvWU</a></p> to get updates on Kwara Talents Harvest Seasons</p>
+            <h1 className="text-xl sm:text-3xl font-bold">
+              Kwara Talents Harvest Season 5
+            </h1>
+            <p className="text-sm sm:text-base text-gray-400">
+              Register and unleash your talents to the world! Join our WhatsApp
+              Group{" "}
+              <a
+                href="https://chat.whatsapp.com/JxvKM5xasmuFOpD5zJWvWU"
+                className="text-blue-500 underline"
+              >
+                here
+              </a>{" "}
+              for updates on Kwara Talents Harvest.
+            </p>
           </div>
 
           <form
@@ -184,25 +204,36 @@ const Registration = () => {
               </button>
             </div>
           </form>
+
           <div className="flex items-center pt-4 space-x-1">
             <div className="flex-1 h-px bg-gray-700"></div>
-            <p className="px-3 text-sm text-gray-400">Signup with social accounts</p>
+            <p className="px-3 text-sm text-gray-400">
+              Signup with social accounts
+            </p>
             <div className="flex-1 h-px bg-gray-700"></div>
           </div>
-          <div onClick={handleGoogleSignIn} className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 cursor-pointer">
+
+          <div
+            onClick={handleGoogleSignIn}
+            className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 cursor-pointer"
+          >
             <FcGoogle size={32} />
             <p>Continue with Google</p>
           </div>
+
           <p className="px-6 text-sm text-center text-gray-400">
-            Already have an account?{' '}
-            <Link to="/login" className="hover:underline hover:text-blue-500 text-gray-600">
-            Login
-          </Link>
-          .
-        </p>
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              className="hover:underline hover:text-blue-500 text-gray-600"
+            >
+              Login
+            </Link>
+            .
+          </p>
         </div>
       </div>
-      </div>
+    </div>
   );
 };
 

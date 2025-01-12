@@ -31,6 +31,7 @@ import AdminDashboard from "../pages/admin/AdminDashboard";
 
 import Voting from "../pages/Voting"; // path to vote
 import Payment from "../pages/Payment";
+import Admin from "../pages/Admin";
 
 
 const router = createBrowserRouter([
@@ -179,6 +180,14 @@ const router = createBrowserRouter([
     element: (
       <PublicRoute>
         <Registration />
+      </PublicRoute>
+    ),
+  },
+  {
+    path: "/admin",
+    element: (
+      <PublicRoute>
+        <Admin />
       </PublicRoute>
     ),
   },
