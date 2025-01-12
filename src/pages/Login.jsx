@@ -67,6 +67,27 @@ const Login = () => {
           className="space-y-6 ng-untouched ng-pristine ng-valid"
         >
           <div className="space-y-4">
+          <button
+                onClick={() => navigate("/vote")}
+                className="
+                  inline-flex
+                  items-center
+                  px-6
+                  py-3
+                  text-sm
+                  font-bold
+                  text-white
+                  uppercase
+                  transition-all
+                  duration-200
+                  bg-blue-600
+                  rounded-md
+                  hover:bg-blue-700
+                  focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+                "
+              >
+              Vote Now
+              </button>
             <div>
               <label htmlFor="email" className="block mb-2 text-sm">
                 Email address

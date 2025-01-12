@@ -5,7 +5,9 @@ import {
   ref,
   push,
   onValue,
-  update,
+  query,
+  orderByChild,
+  equalTo,
 } from "firebase/database";
 import app from "../firebase/firebase.config";
 
@@ -17,7 +19,6 @@ const Voting = () => {
   const [votes, setVotes] = useState(1);
   const [countdown, setCountdown] = useState(300); // 5-minute countdown
   const [isAwaitingApproval, setIsAwaitingApproval] = useState(false);
-  const [approvalTimer, setApprovalTimer] = useState(null); // Timer for admin approval
   const db = getDatabase(app);
 
   // Fetch participants from Firebase
@@ -44,54 +45,43 @@ const Voting = () => {
 
       return () => clearInterval(timer);
     }
-  }, [showPopup, countdown]);
 
-  // Approval Listener Logic
-  useEffect(() => {
-    if (isAwaitingApproval) {
-      const paymentsRef = ref(db, "payments");
-
-      const approvalChecker = setInterval(() => {
-        onValue(paymentsRef, (snapshot) => {
-          const data = snapshot.val();
-          if (data) {
-            const approvedPayment = Object.values(data).find(
-              (payment) =>
-                payment.participantId === selectedParticipant.id &&
-                payment.status === "Approved"
-            );
-
-            if (approvedPayment) {
-              toast.success("Payment approved! Your vote has been counted.");
-              setShowPopup(false); // Close the popup
-              setIsAwaitingApproval(false); // Stop approval checks
-              clearInterval(approvalChecker); // Clear interval
-            }
-          }
-        });
-      }, 3000); // Check every 3 seconds
-
-      setApprovalTimer(approvalChecker);
-
-      return () => clearInterval(approvalChecker);
-    }
-  }, [isAwaitingApproval, db, selectedParticipant]);
-
-  // Handle Payment Expiry
-  useEffect(() => {
     if (countdown <= 0 && isAwaitingApproval) {
       toast.error(
         "Payment not approved within the time limit. Please contact admin."
       );
-      setShowPopup(false); // Close the popup
+      setShowPopup(false); // Close popup
       setIsAwaitingApproval(false); // Stop approval checks
-
-      // Clear approval timer
-      if (approvalTimer) {
-        clearInterval(approvalTimer);
-      }
     }
-  }, [countdown, isAwaitingApproval, approvalTimer]);
+  }, [showPopup, countdown, isAwaitingApproval]);
+
+  // Check for admin approval
+  useEffect(() => {
+    if (isAwaitingApproval) {
+      const paymentsRef = query(
+        ref(db, "payments"),
+        orderByChild("participantId"),
+        equalTo(selectedParticipant.id)
+      );
+
+      const approvalListener = onValue(paymentsRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          const approvedPayment = Object.values(data).find(
+            (payment) => payment.status === "Approved"
+          );
+
+          if (approvedPayment) {
+            toast.success("Payment approved! Your vote has been counted.");
+            setShowPopup(false); // Close the popup
+            setIsAwaitingApproval(false); // Stop approval checks
+          }
+        }
+      });
+
+      return () => approvalListener(); // Cleanup listener on unmount
+    }
+  }, [isAwaitingApproval, db, selectedParticipant]);
 
   const handleVote = (participant) => {
     const votesLeft = parseInt(localStorage.getItem("votesLeft") || 200, 10);
