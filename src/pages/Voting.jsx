@@ -5,6 +5,7 @@ import {
   ref,
   push,
   onValue,
+  update,
 } from "firebase/database";
 import app from "../firebase/firebase.config";
 
@@ -15,7 +16,8 @@ const Voting = () => {
   const [proof, setProof] = useState(null);
   const [votes, setVotes] = useState(1);
   const [countdown, setCountdown] = useState(300); // 5-minute countdown
-  const [isAwaitingApproval, setIsAwaitingApproval] = useState(false); // For admin approval
+  const [isAwaitingApproval, setIsAwaitingApproval] = useState(false);
+  const [approvalTimer, setApprovalTimer] = useState(null); // Timer for admin approval
   const db = getDatabase(app);
 
   // Fetch participants from Firebase
@@ -39,14 +41,16 @@ const Voting = () => {
       const timer = setInterval(() => {
         setCountdown((prev) => prev - 1);
       }, 1000);
+
       return () => clearInterval(timer);
     }
   }, [showPopup, countdown]);
 
-  // Check for payment approval
+  // Approval Listener Logic
   useEffect(() => {
     if (isAwaitingApproval) {
       const paymentsRef = ref(db, "payments");
+
       const approvalChecker = setInterval(() => {
         onValue(paymentsRef, (snapshot) => {
           const data = snapshot.val();
@@ -67,9 +71,27 @@ const Voting = () => {
         });
       }, 3000); // Check every 3 seconds
 
+      setApprovalTimer(approvalChecker);
+
       return () => clearInterval(approvalChecker);
     }
   }, [isAwaitingApproval, db, selectedParticipant]);
+
+  // Handle Payment Expiry
+  useEffect(() => {
+    if (countdown <= 0 && isAwaitingApproval) {
+      toast.error(
+        "Payment not approved within the time limit. Please contact admin."
+      );
+      setShowPopup(false); // Close the popup
+      setIsAwaitingApproval(false); // Stop approval checks
+
+      // Clear approval timer
+      if (approvalTimer) {
+        clearInterval(approvalTimer);
+      }
+    }
+  }, [countdown, isAwaitingApproval, approvalTimer]);
 
   const handleVote = (participant) => {
     const votesLeft = parseInt(localStorage.getItem("votesLeft") || 200, 10);
@@ -107,9 +129,7 @@ const Voting = () => {
       const paymentRef = ref(db, "payments");
       await push(paymentRef, paymentData);
 
-      toast.success(
-        "Payment proof submitted! Waiting for admin approval."
-      );
+      toast.success("Payment proof submitted! Waiting for admin approval.");
       setIsAwaitingApproval(true); // Start checking for admin approval
     } catch (error) {
       console.error("Error submitting payment:", error);
@@ -211,12 +231,6 @@ const Voting = () => {
                 I Have Paid
               </button>
             </form>
-            <button
-              onClick={() => setShowPopup(false)}
-              className="w-full px-4 py-2 mt-4 text-white bg-red-600 rounded-md hover:bg-red-700"
-            >
-              Cancel
-            </button>
           </div>
         </div>
       )}
