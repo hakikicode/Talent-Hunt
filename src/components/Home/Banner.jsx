@@ -83,7 +83,7 @@ const Banner = () => {
 
 <div className="flex justify-center mt-8 gap-4">
   <button
-    onClick={() => navigate("/register")}
+    onClick={() => navigate("#")}
     className="
       inline-flex
       items-center
@@ -101,7 +101,7 @@ const Banner = () => {
       focus:ring-2 focus:ring-offset-2 focus:ring-green-500
     "
   >
-                Register Now
+                Registeration Closed
               </button>
 
               {/* <button
