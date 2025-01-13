@@ -1,14 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import bannerImage from '../assets/banner.png';
 
 const Banner = () => {
   const navigate = useNavigate();
   const { handleSubmit, register, reset } = useForm();
+  const [showPopup, setShowPopup] = useState(true); // Popup visibility state
 
   const onSearch = (data) => {
     navigate("/contests", { state: { search: data.search } });
     reset();
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
   };
 
   return (
@@ -129,6 +135,49 @@ const Banner = () => {
           </div>
         </div>
       </div>
+
+      {/* Popup Message */}
+      {showPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="w-96 p-6 bg-white rounded-lg shadow-lg relative">
+            <button
+              onClick={closePopup}
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+            >
+              ✖
+            </button>
+            <h2 className="text-lg font-bold text-center">
+              Audition Details
+            </h2>
+            <p className="mt-4 text-gray-700">
+              We’re glad to invite all applicants to audition for Kwara Talent
+              Harvest 5.0 after going through your application.
+            </p>
+            <ul className="mt-4 text-gray-800">
+              <li>
+                <b>Date:</b> 15th, January 2025
+              </li>
+              <li>
+                <b>Time:</b> 7:00 am
+              </li>
+              <li>
+                <b>Venue:</b> Sugar Film Factory Studio. 12, AJASE IPO ROAD,
+                BESIDE NIGERIAN AIR FORCE BASE, ILORIN, KWARA STATE.
+              </li>
+              <li>
+                <b>Registration:</b> FREE
+              </li>
+            </ul>
+            <p className="mt-4 text-gray-700">
+              Please come prepared with your custom and ready to showcase your
+              talents.
+            </p>
+            <p className="mt-2 text-gray-700">
+              We look forward to seeing you there.
+            </p>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
