@@ -36,9 +36,15 @@ const Banner = () => {
               Show Your Talent <br /> Shine to the World
             </h1>
             <p className="max-w-lg mx-auto mt-6 text-lg font-medium leading-7 text-gray-200">
-              Join Kwara's premier talent-harvesting platform! Register, showcase
-              your skills, and let the audience decide your fate with their
-              votes.
+              THE NEXT CHAPTER BEGINS!
+
+              To our talented contestants, congratulations on completing the audition stage!
+
+              We are thrilled to announce that E-VOTING LIVE SOON!
+
+              Cast your votes, share with your network, and let the talent shine!
+
+              Click on the button below to vote now and take the first step towards raising a participant to stardom!
             </p>
 
             <form
@@ -146,34 +152,32 @@ const Banner = () => {
             >
               ✖
             </button>
-            <h2 className="text-lg font-bold text-center">
-              Audition Details
+            <h2 className="text-lg text-red font-bold text-center">
+            IMPORTANT UPDATE!
             </h2>
             <p className="mt-4 text-gray-700">
-              We’re glad to invite all applicants to audition for Kwara Talent
-              Harvest 5.0 after going through your application.
+            Registration for Kwara Talent Harvest 5.0 is NOW OFFICIALLY CLOSED!
             </p>
             <ul className="mt-4 text-gray-800">
               <li>
-                <b>Date:</b> 15th, January 2025
+                <b>A huge thank you to all the talented individuals who applied!</b> 
+                We are thrilled to have received so many amazing entries!
               </li>
               <li>
-                <b>Time:</b> 7:00 am
+                <b>Get ready</b> for an unforgettable showcase of talent!
               </li>
               <li>
-                <b>Venue:</b> Sugar Film Factory Studio. 12, AJASE IPO ROAD,
-                BESIDE NIGERIAN AIR FORCE BASE, ILORIN, KWARA STATE.
+                <b>And now,</b> it's time to move on to the next stage...
               </li>
               <li>
-                <b>Registration:</b> FREE
+                <b>E-VOTING</b> Start Soon!
               </li>
             </ul>
             <p className="mt-4 text-gray-700">
-              Please come prepared with your custom and ready to showcase your
-              talents.
+            Cast your votes and support your favorite contestants!
             </p>
             <p className="mt-2 text-gray-700">
-              We look forward to seeing you there.
+            vote now will be available when voting starts!
             </p>
           </div>
         </div>
