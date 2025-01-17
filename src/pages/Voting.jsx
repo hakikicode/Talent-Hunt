@@ -127,14 +127,35 @@ const Voting = () => {
     }
   };
 
+  const handleShare = (participant) => {
+    const shareUrl = `${window.location.origin}/vote?participantId=${participant.id}`;
+    const shareText = `Support ${participant.name}'s talent by voting now on Kwara Talents Harvest! ${shareUrl}`;
+
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "Kwara Talents Harvest",
+          text: shareText,
+          url: shareUrl,
+        })
+        .then(() => toast.success("Link shared successfully!"))
+        .catch(() => toast.error("Failed to share the link."));
+    } else {
+      navigator.clipboard
+        .writeText(shareUrl)
+        .then(() => toast.success("Link copied to clipboard!"))
+        .catch(() => toast.error("Failed to copy the link."));
+    }
+  };
+
   return (
     <section className="py-12 bg-gray-100 sm:py-16 lg:py-20">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-center text-gray-800">
           Vote for Your Favorite Talent
         </h2>
-        <p className="max-w-lg mx-auto mt-6 text-lg font-bold text-yellow-400 bg-red-600 p-3 rounded-lg animate-pulse text-center">
-          SHOW YOUR LOVE & SUPPORT! ❤️ Vote now for just ₦300 per vote! 🚀🔥
+        <p className="max-w-full mt-4 text-lg font-bold text-yellow-400 bg-red-600 p-2 rounded-lg animate-pulse text-center">
+        Kwara Talents Harvest 5.0 Voting - SHOW YOUR LOVE & SUPPORT! ❤️ Vote now for just ₦300 per vote! 🚀🔥
         </p>
         <div className="grid grid-cols-1 gap-6 mt-8 sm:grid-cols-2 lg:grid-cols-3">
           {participants.map((participant) => (
@@ -160,73 +181,24 @@ const Voting = () => {
                 />
                 <span>{participant.votes} Votes</span>
               </div>
-              <button
-                onClick={() => handleVote(participant)}
-                className="w-full px-4 py-2 mt-4 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              >
-                Vote Now
-              </button>
+              <div className="mt-4 flex gap-2 justify-center">
+                <button
+                  onClick={() => handleVote(participant)}
+                  className="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  Vote Now
+                </button>
+                <button
+                  onClick={() => handleShare(participant)}
+                  className="px-4 py-2 text-white bg-green-600 rounded-md hover:bg-green-700 focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                >
+                  Share
+                </button>
+              </div>
             </div>
           ))}
         </div>
       </div>
-
-      {/* Payment Popup */}
-      {showPopup && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="w-96 p-6 bg-white rounded-lg shadow-lg">
-            <h2 className="text-lg font-bold text-center">
-              Bank Transfer Payment
-            </h2>
-            <p className="mt-4">
-              <b>Account Name:</b> Kwara Talents Harvest <br />
-              <b>Account Number:</b> 4820114717 <br />
-              <b>Bank:</b> Eco Bank
-            </p>
-            <p className="mt-2">
-              <b>Countdown:</b> {Math.floor(countdown / 60)}:
-              {String(countdown % 60).padStart(2, "0")}
-            </p>
-            <form onSubmit={handleProofUpload} className="mt-4">
-              <label className="block text-gray-700 font-semibold mb-2">
-                Number of Votes:
-              </label>
-              <input
-                type="number"
-                value={votes}
-                onChange={(e) =>
-                  setVotes(Math.min(200, Math.max(1, +e.target.value)))
-                }
-                max="200"
-                min="1"
-                className="block w-full border rounded-md p-2"
-                required
-              />
-              <p className="text-gray-600 mt-2">
-                Total: <b>{votes * 300} Naira</b>
-              </p>
-
-              <label className="block text-gray-700 font-semibold mt-4">
-                Upload Proof of Payment:
-              </label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => setProof(e.target.files[0])}
-                className="block w-full border rounded-md p-2 mt-2"
-                required
-              />
-
-              <button
-                type="submit"
-                className="w-full px-4 py-2 mt-4 text-white bg-blue-600 rounded-md hover:bg-blue-700"
-              >
-                I Have Paid
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
     </section>
   );
 };
