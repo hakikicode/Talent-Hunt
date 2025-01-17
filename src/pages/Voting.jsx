@@ -133,13 +133,9 @@ const Voting = () => {
         <h2 className="text-3xl font-bold text-center text-gray-800">
           Vote for Your Favorite Talent
         </h2>
-        <p className="max-w-lg mx-auto mt-6 text-lg font-medium leading-7 text-brown-200">
-        SHOW YOUR LOVE & SUPPORT!
-        Vote for your favorite contestants and help them shine! Voting details:
-        Cost: ₦300 per vote
-        No limit on total votes, but max 200 votes per voter
-        Cast your votes now and help your favourite contestants advance in the competition.
-            </p>
+        <p className="max-w-lg mx-auto mt-6 text-lg font-bold text-yellow-400 bg-red-600 p-3 rounded-lg animate-pulse text-center">
+          SHOW YOUR LOVE & SUPPORT! ❤️ Vote now for just ₦300 per vote! 🚀🔥
+        </p>
         <div className="grid grid-cols-1 gap-6 mt-8 sm:grid-cols-2 lg:grid-cols-3">
           {participants.map((participant) => (
             <div
