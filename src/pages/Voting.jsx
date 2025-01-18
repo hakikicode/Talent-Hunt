@@ -210,7 +210,7 @@ const Voting = () => {
             <p className="mt-4">
               <b>Account Name:</b> Kwara Talents Harvest <br />
               <b>Account Number:</b> 4820114717 <br />
-              <b>Bank:</b> Eco Bank
+              <b>Bank:</b> Eco Bank <br />
               <b>Comment/Narration:</b> comment name of the contestant you're voting for
             </p>
             <p className="mt-2">
