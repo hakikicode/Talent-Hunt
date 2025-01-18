@@ -199,6 +199,63 @@ const Voting = () => {
           ))}
         </div>
       </div>
+
+      {/* Payment Popup */}
+      {showPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="w-96 p-6 bg-white rounded-lg shadow-lg">
+            <h2 className="text-lg font-bold text-center">
+              Bank Transfer Payment
+            </h2>
+            <p className="mt-4">
+              <b>Account Name:</b> Kwara Talents Harvest <br />
+              <b>Account Number:</b> 4820114717 <br />
+              <b>Bank:</b> Eco Bank
+            </p>
+            <p className="mt-2">
+              <b>Countdown:</b> {Math.floor(countdown / 60)}:
+              {String(countdown % 60).padStart(2, "0")}
+            </p>
+            <form onSubmit={handleProofUpload} className="mt-4">
+              <label className="block text-gray-700 font-semibold mb-2">
+                Number of Votes:
+              </label>
+              <input
+                type="number"
+                value={votes}
+                onChange={(e) =>
+                  setVotes(Math.min(200, Math.max(1, +e.target.value)))
+                }
+                max="200"
+                min="1"
+                className="block w-full border rounded-md p-2"
+                required
+              />
+              <p className="text-gray-600 mt-2">
+                Total: <b>{votes * 300} Naira</b>
+              </p>
+
+              <label className="block text-gray-700 font-semibold mt-4">
+                Upload Proof of Payment:
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setProof(e.target.files[0])}
+                className="block w-full border rounded-md p-2 mt-2"
+                required
+              />
+
+              <button
+                type="submit"
+                className="w-full px-4 py-2 mt-4 text-white bg-blue-600 rounded-md hover:bg-blue-700"
+              >
+                I Have Paid
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
