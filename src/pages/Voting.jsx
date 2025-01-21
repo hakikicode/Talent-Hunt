@@ -176,7 +176,7 @@ const Voting = () => {
                 <label className="block text-gray-600">Votes:</label>
                 <progress
                   value={participant.votes}
-                  max="3000"
+                  max="2000"
                   className="w-full h-3 bg-gray-200 rounded-full"
                 />
                 <span>{participant.votes} Votes</span>
