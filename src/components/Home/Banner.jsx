@@ -81,7 +81,7 @@ const Banner = () => {
 
               To our talented contestants, congratulations on completing the audition stage!
 
-              We are thrilled to announce that E-VOTING LIVE SOON!
+              We are thrilled to announce that E-VOTING END SOON!
 
               Cast your votes, share with your network, and let the talent shine!
 
@@ -224,7 +224,7 @@ const Banner = () => {
           <li>✨ <b>Thank you</b> to all the amazing talents who applied!</li>
           <li>🔥 <b>Get ready</b> for an unforgettable talent showcase!</li>
           <li>🎉 <b>Next stage:</b> It's time to move forward!</li>
-          <li>🗳️ <b>E-VOTING</b> IS LIVE!</li>
+          <li>🗳️ <b>E-VOTING</b> ENDS TONIGHT BY 12AM!</li>
         </ul>
         <p className="mt-4 text-center text-yellow-300 font-semibold text-lg">
           Cast your votes and support your favorite contestants!
