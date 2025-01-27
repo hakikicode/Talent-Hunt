@@ -155,7 +155,7 @@ const Voting = () => {
           Vote for Your Favorite Talent
         </h2>
         <p className="max-w-full mt-4 text-lg font-bold text-yellow-400 bg-red-600 p-2 rounded-lg animate-pulse text-center">
-        Kwara Talents Harvest 5.0 Voting - SHOW YOUR LOVE & SUPPORT! ❤️ Vote now for just ₦300 per vote! 🚀🔥
+        Kwara Talents Harvest 5.0 Voting ENDS by 11:59PM Tonight - SHOW YOUR LOVE & SUPPORT! ❤️ Vote now for just ₦300 per vote! 🚀🔥
         </p>
         <div className="grid grid-cols-1 gap-6 mt-8 sm:grid-cols-2 lg:grid-cols-3">
           {participants.map((participant) => (
