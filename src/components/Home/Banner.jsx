@@ -81,11 +81,11 @@ const Banner = () => {
 
               To our talented contestants, congratulations on completing the audition stage!
 
-              We are thrilled to announce that E-VOTING END SOON!
+              We are thrilled to announce that E-VOTING As Now Come To An END!
 
-              Cast your votes, share with your network, and let the talent shine!
+              your votes are counted, share with your network, and let the talent shine!
 
-              Click on the button below to vote now and take the first step towards raising a participant to stardom!
+              Click on the button below to view contestants!
             </p>
 
             <form
@@ -197,7 +197,7 @@ const Banner = () => {
                   focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
                 "
               >
-              Vote Now
+              View Contestants
               </button>
             </div>
           </div>
@@ -215,22 +215,22 @@ const Banner = () => {
           ✖
         </button>
         <h2 className="text-xl font-extrabold text-center animate-pulse">
-          🚨 IMPORTANT UPDATE! 🚨
+          🚨 IMPORTANT ANNOUNCEMENT! 🚨
         </h2>
         <p className="mt-4 text-lg font-semibold text-yellow-200 text-center">
-          Registration for Kwara Talent Harvest 5.0 is NOW OFFICIALLY CLOSED!
+          E-Voting Has Officially Closed!
         </p>
         <ul className="mt-4 space-y-3 text-white font-medium">
-          <li>✨ <b>Thank you</b> to all the amazing talents who applied!</li>
-          <li>🔥 <b>Get ready</b> for an unforgettable talent showcase!</li>
-          <li>🎉 <b>Next stage:</b> It's time to move forward!</li>
-          <li>🗳️ <b>E-VOTING</b> ENDS TONIGHT BY 12AM!</li>
+          <li>✨ <b>Thank you to all participants </b> who cast their votes electronically.</li>
+          <li>🔥 <b>The e-voting period </b> has now come to an end, and we appreciate your engagement in this process.</li>
+          <li>🎉 <b>Please note </b> that any votes submitted after the deadline will not be counted.</li>
+          <li>🗳️ <b>We will now proceed </b> with the next stage of the competition/event.</li>
         </ul>
         <p className="mt-4 text-center text-yellow-300 font-semibold text-lg">
-          Cast your votes and support your favorite contestants!
+          Stay tuned for further updates and announcements!
         </p>
         <p className="mt-2 text-center text-white">
-        Vote for Your Favorite – Talent!
+        View – Contestants!
           <button
                 onClick={() => navigate("/vote")}
                 className="
@@ -250,7 +250,7 @@ const Banner = () => {
                   focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
                 "
               >
-              Vote Now
+              View Contestants
               </button>
         </p>
         </div>
