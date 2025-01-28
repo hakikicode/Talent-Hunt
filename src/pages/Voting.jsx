@@ -146,7 +146,7 @@ const Voting = () => {
 
   const handleShare = (participant) => {
     const shareUrl = `${window.location.origin}/vote?participantId=${participant.id}`;
-    const shareText = `Support ${participant.name}'s talent by voting now on Kwara Talents Harvest! ${shareUrl}`;
+    const shareText = `View ${participant.name}'s votes! ${shareUrl}`;
 
     if (navigator.share) {
       navigator
@@ -172,7 +172,7 @@ const Voting = () => {
           Vote for Your Favorite Talent
         </h2>
         <p className="max-w-full mt-4 text-lg font-bold text-yellow-400 bg-red-600 p-2 rounded-lg animate-pulse text-center">
-        Kwara Talents Harvest 5.0 Voting As Officially ENDED - THANKS YOUR LOVE & SUPPORT! ❤️ All Your Votes are counted! 🚀🔥
+        Kwara Talents Harvest 5.0 Voting As Officially ENDED - THANKS FOR YOUR LOVE & SUPPORT! ❤️ All Your Votes are counted! 🚀🔥
         </p>
         <div className="grid grid-cols-1 gap-6 mt-8 sm:grid-cols-2 lg:grid-cols-3">
           {participants.map((participant) => (
@@ -199,13 +199,13 @@ const Voting = () => {
                 <span>{participant.votes} Votes</span>
               </div>
               <div className="mt-4 flex gap-2 justify-center">
-                <button
+                {/* <button
                   onClick={() => handleVote(participant)}
                   className="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                   disabled={isVotingClosed} // Disable button if voting is closed
                 >
                   Vote Now
-                </button>
+                </button> */}
                 <button
                   onClick={() => handleShare(participant)}
                   className="px-4 py-2 text-white bg-green-600 rounded-md hover:bg-green-700 focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
