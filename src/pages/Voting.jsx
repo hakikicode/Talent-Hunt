@@ -19,7 +19,19 @@ const Voting = () => {
   const [votes, setVotes] = useState(1);
   const [countdown, setCountdown] = useState(300); // 5-minute countdown
   const [isAwaitingApproval, setIsAwaitingApproval] = useState(false);
+  const [isVotingClosed, setIsVotingClosed] = useState(false); // To track if voting is closed
   const db = getDatabase(app);
+
+  // Check if voting is closed by 11:59 PM today
+  useEffect(() => {
+    const currentDate = new Date();
+    const deadline = new Date();
+    deadline.setHours(23, 59, 59, 999); // Set deadline to 11:59:59 PM today
+
+    if (currentDate > deadline) {
+      setIsVotingClosed(true); // Disable voting if after deadline
+    }
+  }, []);
 
   // Fetch participants from Firebase
   useEffect(() => {
@@ -84,6 +96,11 @@ const Voting = () => {
   }, [isAwaitingApproval, db, selectedParticipant]);
 
   const handleVote = (participant) => {
+    if (isVotingClosed) {
+      toast.error("Voting has closed. Please check back next time!");
+      return;
+    }
+
     const votesLeft = parseInt(localStorage.getItem("votesLeft") || 200, 10);
 
     if (votesLeft <= 0) {
@@ -155,7 +172,7 @@ const Voting = () => {
           Vote for Your Favorite Talent
         </h2>
         <p className="max-w-full mt-4 text-lg font-bold text-yellow-400 bg-red-600 p-2 rounded-lg animate-pulse text-center">
-        Kwara Talents Harvest 5.0 Voting ENDS by 11:59PM Tonight - SHOW YOUR LOVE & SUPPORT! ❤️ Vote now for just ₦300 per vote! 🚀🔥
+        Kwara Talents Harvest 5.0 Voting As Officially ENDED - THANKS YOUR LOVE & SUPPORT! ❤️ All Your Votes are counted! 🚀🔥
         </p>
         <div className="grid grid-cols-1 gap-6 mt-8 sm:grid-cols-2 lg:grid-cols-3">
           {participants.map((participant) => (
@@ -185,6 +202,7 @@ const Voting = () => {
                 <button
                   onClick={() => handleVote(participant)}
                   className="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  disabled={isVotingClosed} // Disable button if voting is closed
                 >
                   Vote Now
                 </button>
