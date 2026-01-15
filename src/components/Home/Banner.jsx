@@ -79,13 +79,13 @@ const Banner = () => {
             <p className="max-w-lg mx-auto mt-6 text-lg font-medium leading-7 text-gray-200">
               THE NEXT CHAPTER BEGINS!
 
-              To our talented contestants, congratulations on completing the audition stage!
+              Kwara Talents Harvest 6.0, Registration Will Be Open!
 
-              We are thrilled to announce that E-VOTING As Now Come To An END!
+              Soon!
 
-              your votes are counted, share with your network, and let the talent shine!
+              Get Ready to showcase you talent to kwara and the world!
 
-              Click on the button below to view contestants!
+              Click on the button below to view Past Events!
             </p>
 
             <form
@@ -218,19 +218,19 @@ const Banner = () => {
           🚨 IMPORTANT ANNOUNCEMENT! 🚨
         </h2>
         <p className="mt-4 text-lg font-semibold text-yellow-200 text-center">
-          E-Voting Has Officially Closed!
+          E-Voting will start after registration ends!
         </p>
         <ul className="mt-4 space-y-3 text-white font-medium">
-          <li>✨ <b>Thank you to all participants </b> who cast their votes electronically.</li>
-          <li>🔥 <b>The e-voting period </b> has now come to an end, and we appreciate your engagement in this process.</li>
-          <li>🎉 <b>Please note </b> that any votes submitted after the deadline will not be counted.</li>
-          <li>🗳️ <b>We will now proceed </b> with the next stage of the competition/event.</li>
+          <li>✨ <b>Thank you to all past participants </b> who cast their votes electronically.</li>
+          <li>🔥 <b>The e-voting period </b> for this year, will be made public soon.</li>
+          <li>🎉 <b>Please note </b> this year will be more fun and engaging.</li>
+          <li>🗳️ <b>We will start </b> registration in few days.</li>
         </ul>
         <p className="mt-4 text-center text-yellow-300 font-semibold text-lg">
           Stay tuned for further updates and announcements!
         </p>
         <p className="mt-2 text-center text-white">
-        View – Contestants!
+        View – Past Contestants!
           <button
                 onClick={() => navigate("/vote")}
                 className="
@@ -250,7 +250,7 @@ const Banner = () => {
                   focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
                 "
               >
-              View Contestants
+              View Past Contestants
               </button>
         </p>
         </div>
