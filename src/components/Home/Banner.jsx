@@ -215,7 +215,7 @@ const Banner = () => {
           ✖
         </button>
         <h2 className="text-xl font-extrabold text-center animate-pulse">
-          🚨 IMPORTANT ANNOUNCEMENT! 🚨
+          🚨 IMPORTANT NOTICE! 🚨
         </h2>
         <p className="mt-4 text-lg font-semibold text-yellow-200 text-center">
           E-Voting will start after registration ends!
