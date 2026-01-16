@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getDatabase, ref, onValue } from "firebase/database";
 import app from "../../firebase/firebase.config";
 import bannerImage from '../assets/banner.png';
@@ -11,8 +11,37 @@ const Banner = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [results, setResults] = useState([]);
   const [showPopup, setShowPopup] = useState(true); // Popup visibility state
+  const [timeLeft, setTimeLeft] = useState(0);
 
   const db = getDatabase(app); // Initialize Firebase Database
+
+  // Set countdown to 15 hours (in milliseconds)
+  useEffect(() => {
+    const targetTime = Date.now() + 15 * 60 * 60 * 1000; // 15 hours from now
+
+    const interval = setInterval(() => {
+      const now = Date.now();
+      const diff = targetTime - now;
+
+      if (diff <= 0) {
+        setTimeLeft(0);
+        clearInterval(interval);
+      } else {
+        setTimeLeft(diff);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Convert milliseconds to HH:MM:SS
+  const formatTime = (ms) => {
+    const totalSeconds = Math.floor(ms / 1000);
+    const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+    const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+    const seconds = String(totalSeconds % 60).padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -77,25 +106,15 @@ const Banner = () => {
               Show Your Talent <br /> Shine to the World
             </h1>
             <p className="max-w-lg mx-auto mt-6 text-lg font-medium leading-7 text-gray-200">
-              THE NEXT CHAPTER BEGINS!
-
-              Kwara Talents Harvest 6.0, Registration Will Be Open!
-
-              Soon!
-
-              Get Ready to showcase you talent to kwara and the world!
-
-              Click on the button below to view Past Events!
+              THE NEXT CHAPTER BEGINS!<br />
+              Kwara Talents Harvest 6.0, Registration Will Be Open Soon!<br />
+              Get ready to showcase your talent to Kwara and the world!<br />
+              Click the button below to view Past Events.
             </p>
 
-            <form
-              onSubmit={handleSearch}
-              className="max-w-xl mx-auto mt-10"
-            >
+            <form onSubmit={handleSearch} className="max-w-xl mx-auto mt-10">
               <div>
-                <label htmlFor="search" className="sr-only">
-                  Search
-                </label>
+                <label htmlFor="search" className="sr-only">Search</label>
                 <div className="relative">
                   <input
                     type="text"
@@ -110,25 +129,7 @@ const Banner = () => {
 
               <button
                 type="submit"
-                className="
-                  mt-4
-                  inline-flex
-                  items-center
-                  justify-center
-                  w-full
-                  px-6
-                  py-3
-                  text-sm
-                  font-bold
-                  text-white
-                  uppercase
-                  transition-all
-                  duration-200
-                  bg-red-600
-                  rounded-md
-                  hover:bg-red-700
-                  focus:ring-2 focus:ring-offset-2 focus:ring-red-500
-                "
+                className="mt-4 inline-flex items-center justify-center w-full px-6 py-3 text-sm font-bold text-white uppercase transition-all duration-200 bg-red-600 rounded-md hover:bg-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
               >
                 Search Contests
               </button>
@@ -146,58 +147,19 @@ const Banner = () => {
                       className="cursor-pointer hover:bg-gray-100 p-2 rounded-md"
                     >
                       <p className="text-gray-800 font-medium">{result.name}</p>
-                      <p className="text-gray-600 text-sm">
-                        Talent: {result.talent}
-                      </p>
+                      <p className="text-gray-600 text-sm">Talent: {result.talent}</p>
                     </li>
                   ))}
                 </ul>
               </div>
             )}
 
-<div className="flex justify-center mt-8 gap-4">
-  {/* <button
-    onClick={() => navigate("#")}
-    className="
-      inline-flex
-      items-center
-      px-6
-      py-3
-      text-sm
-      font-bold
-      text-white
-      uppercase
-      transition-all
-      duration-200
-      bg-green-600
-      rounded-md
-      hover:bg-green-700
-      focus:ring-2 focus:ring-offset-2 focus:ring-green-500
-    "
-  >
-                Registeration Closed
-              </button> */}
-
+            <div className="flex justify-center mt-8 gap-4">
               <button
                 onClick={() => navigate("/vote")}
-                className="
-                  inline-flex
-                  items-center
-                  px-6
-                  py-3
-                  text-sm
-                  font-bold
-                  text-white
-                  uppercase
-                  transition-all
-                  duration-200
-                  bg-blue-600
-                  rounded-md
-                  hover:bg-blue-700
-                  focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
-                "
+                className="inline-flex items-center px-6 py-3 text-sm font-bold text-white uppercase transition-all duration-200 bg-blue-600 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
-              View Contestants
+                View Contestants
               </button>
             </div>
           </div>
@@ -206,55 +168,36 @@ const Banner = () => {
 
       {/* Popup Message */}
       {showPopup && (
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50">
-        <div className="w-96 p-6 bg-gradient-to-r from-red-600 to-red-800 text-white rounded-lg shadow-2xl ring-4 ring-yellow-400 animate-scale-in relative">
-        <button
-          onClick={closePopup}
-          className="absolute top-2 right-2 text-white text-2xl hover:text-yellow-400 transition-transform transform hover:scale-110 focus:outline-none"
-        >
-          ✖
-        </button>
-        <h2 className="text-xl font-extrabold text-center animate-pulse">
-          🚨 IMPORTANT NOTICE! 🚨
-        </h2>
-        <p className="mt-4 text-lg font-semibold text-yellow-200 text-center">
-          E-Voting will start after registration ends!
-        </p>
-        <ul className="mt-4 space-y-3 text-white font-medium">
-          <li>✨ <b>Thank you to all past participants </b> who cast their votes electronically.</li>
-          <li>🔥 <b>The e-voting period </b> for this year, will be made public soon.</li>
-          <li>🎉 <b>Please note </b> this year will be more fun and engaging.</li>
-          <li>🗳️ <b>We will start </b> registration in few days.</li>
-        </ul>
-        <p className="mt-4 text-center text-yellow-300 font-semibold text-lg">
-          Stay tuned for further updates and announcements!
-        </p>
-        <p className="mt-2 text-center text-white">
-        View – Past Contestants!
-          <button
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50">
+          <div className="w-96 p-6 bg-gradient-to-r from-red-600 to-red-800 text-white rounded-lg shadow-2xl ring-4 ring-yellow-400 animate-scale-in relative">
+            <button
+              onClick={closePopup}
+              className="absolute top-2 right-2 text-white text-2xl hover:text-yellow-400 transition-transform transform hover:scale-110 focus:outline-none"
+            >
+              ✖
+            </button>
+            <h2 className="text-xl font-extrabold text-center animate-pulse">
+              🚨 SITE UPGRADE & REGISTRATION TIMER 🚨
+            </h2>
+            <p className="mt-4 text-lg font-semibold text-yellow-200 text-center">
+              Registration will open in:
+            </p>
+            <p className="mt-2 text-3xl font-bold text-center text-white">
+              {formatTime(timeLeft)}
+            </p>
+            <p className="mt-4 text-center text-yellow-300 font-semibold text-lg">
+              Please check back soon to register and showcase your talent!
+            </p>
+            <div className="mt-4 text-center">
+              <button
                 onClick={() => navigate("/vote")}
-                className="
-                  inline-flex
-                  items-center
-                  px-6
-                  py-3
-                  text-sm
-                  font-bold
-                  text-white
-                  uppercase
-                  transition-all
-                  duration-200
-                  bg-blue-600
-                  rounded-md
-                  hover:bg-blue-700
-                  focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
-                "
+                className="inline-flex items-center px-6 py-3 text-sm font-bold text-white uppercase transition-all duration-200 bg-blue-600 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
-              View Past Contestants
+                View Past Contestants
               </button>
-        </p>
+            </div>
+          </div>
         </div>
-      </div>         
       )}
     </section>
   );
