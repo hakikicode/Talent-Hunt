@@ -56,101 +56,17 @@
 
 <section class="hero">
 
-  <!-- PROGRESS -->
   <div class="progress">
-    <div id="p1" class="done"></div>
-    <div id="p2"></div>
-    <div id="p3"></div>
-    <div id="p4"></div>
+    <div id="bar"></div>
   </div>
 
-  <!-- STEP 1 -->
-  <div class="step active">
-    <h3>Personal Information</h3>
-
-    <input type="text" placeholder="Full Name" id="fullName" required>
-    <input type="text" placeholder="Stage Name (optional)" id="stageName">
-    <input type="number" placeholder="Age" id="age">
-    
-    <select id="gender">
-      <option value="">Select Gender</option>
-      <option>Male</option>
-      <option>Female</option>
-      <option>Other</option>
-    </select>
-
-    <select id="location">
-      <option value="">Select Location</option>
-      <option>Ilorin</option>
-      <option>Offa</option>
-      <option>Omu-Aran</option>
-      <option>Other Kwara</option>
-      <option>Non-Kwaran</option>
-    </select>
-
-    <input type="tel" placeholder="WhatsApp Number" id="whatsapp">
+  <div class="question-card">
+    <h3 id="question"></h3>
+    <div id="input-area"></div>
 
     <div class="nav-buttons">
-      <span></span>
-      <button class="btn primary" onclick="nextStep()">Next</button>
-    </div>
-  </div>
-
-  <!-- STEP 2 -->
-  <div class="step">
-    <h3>Talent Category</h3>
-
-    <select id="talents" multiple>
-      <option>Music</option>
-      <option>Dance</option>
-      <option>Comedy</option>
-      <option>Modelling</option>
-      <option>Chant</option>
-      <option>Art</option>
-      <option>Acting</option>
-      <option>Spoken Word</option>
-      <option>DJing</option>
-      <option>Magic</option>
-      <option>Others</option>
-    </select>
-
-    <textarea placeholder="Short Bio (optional)" id="bio"></textarea>
-
-    <div class="nav-buttons">
-      <button class="btn outline" onclick="prevStep()">Back</button>
-      <button class="btn primary" onclick="nextStep()">Next</button>
-    </div>
-  </div>
-
-  <!-- STEP 3 -->
-  <div class="step">
-    <h3>Social Media Handles</h3>
-
-    <input placeholder="Instagram Username" id="instagram">
-    <input placeholder="Facebook Username" id="facebook">
-    <input placeholder="TikTok Username" id="tiktok">
-    <input placeholder="YouTube Channel Link" id="youtube">
-
-    <p style="font-size: 0.9rem;">
-      👉 Follow us on social media before submitting.
-    </p>
-
-    <div class="nav-buttons">
-      <button class="btn outline" onclick="prevStep()">Back</button>
-      <button class="btn primary" onclick="nextStep()">Next</button>
-    </div>
-  </div>
-
-  <!-- STEP 4 -->
-  <div class="step">
-    <h3>Uploads (Optional)</h3>
-
-    <input type="file" id="photo">
-    <input type="url" placeholder="Performance Video Link (optional)" id="video">
-
-    <div class="nav-buttons">
-      <button class="btn outline" onclick="prevStep()">Back</button>
-      <button class="btn primary" onclick="submitForm()">Submit</button>
+      <button class="btn outline" id="backBtn">Back</button>
+      <button class="btn primary" id="nextBtn">Next</button>
     </div>
   </div>
 

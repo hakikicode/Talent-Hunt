@@ -198,16 +198,6 @@ const Banner = () => {
             <p className="mt-4 text-center text-yellow-300 font-semibold text-lg">
               Please check back soon to register and showcase your talent!
             </p>
-            <div className="mt-4 text-center">
-              <h4 className="font-bold mt-3 text-yellow-200">Follow Us on Social Media:</h4>
-              <ul className="list-disc list-inside space-y-1">
-                <li>Instagram: <a href="https://instagram.com/kwaratalentsharvest" target="_blank" className="text-blue-400 underline">Instagram</a></li>
-                <li>TikTok: <a href="https://www.tiktok.com/@kwara_talentsharvest" target="_blank" className="text-blue-400 underline">TikTok</a></li>
-                <li>Facebook: <a href="https://facebook.com/Kwaratalentharvest" target="_blank" className="text-blue-400 underline">Facebook</a></li>
-                <li>YouTube: <a href="https://youtube.com/@parantiproduction" target="_blank" className="text-blue-400 underline">YouTube</a></li>
-                <li>YouTube: <a href="https://youtube.com/@nativenaijatv" target="_blank" className="text-blue-400 underline">YouTube</a></li>
-              </ul>
-            </div>
           </div>
         </div>
       )}
