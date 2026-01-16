@@ -195,7 +195,7 @@ const Banner = () => {
         <p>Register for <b>KWARA Talent Harvest 6.0</b> in 2 Easy Steps:</p>
         <ol className="list-decimal list-inside space-y-2">
           <li>
-            <b>Follow us on our social media:</b> Like, comment, and share our posts using <b>#kwaratalentharvest6.0</b> to stay updated on the latest news and developments.
+            <b>Follow us on our social media:</b> Like, comment, and share our posts using <b>#kwaratalentharvest</b> to stay updated on the latest news and developments.
           </li>
           <li>
             <b>Complete your registration:</b> Return to this site after following us to finalize your registration.
