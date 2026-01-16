@@ -17,22 +17,32 @@ const Banner = () => {
 
   // Set countdown to 15 hours (in milliseconds)
   useEffect(() => {
-    const targetTime = Date.now() + 10 * 60 * 60 * 1000; // 10 hours from now
+  const storedTarget = localStorage.getItem("registrationTargetTime");
 
-    const interval = setInterval(() => {
-      const now = Date.now();
-      const diff = targetTime - now;
+  let targetTime;
 
-      if (diff <= 0) {
-        setTimeLeft(0);
-        clearInterval(interval);
-      } else {
-        setTimeLeft(diff);
-      }
-    }, 1000);
+  if (storedTarget) {
+    targetTime = parseInt(storedTarget, 10);
+  } else {
+    targetTime = Date.now() + 10 * 60 * 60 * 1000; // 10 hours
+    localStorage.setItem("registrationTargetTime", targetTime);
+  }
 
-    return () => clearInterval(interval);
-  }, []);
+  const interval = setInterval(() => {
+    const now = Date.now();
+    const diff = targetTime - now;
+
+    if (diff <= 0) {
+      setTimeLeft(0);
+      clearInterval(interval);
+      localStorage.removeItem("registrationTargetTime");
+    } else {
+      setTimeLeft(diff);
+    }
+  }, 1000);
+
+  return () => clearInterval(interval);
+}, []);
 
   // Convert milliseconds to HH:MM:SS
   const formatTime = (ms) => {
