@@ -1,0 +1,38 @@
+.hero {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.hero h2 {
+  font-size: 2rem;
+  color: var(--gold);
+}
+
+.flash-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.flash-content {
+  background: #111;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 90%;
+  text-align: center;
+}
+
+.close-flash {
+  display: block;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+@media(max-width:600px){
+  .grid span{display:block;margin:5px}
+  .hero h1{font-size:28px}
+}

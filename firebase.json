@@ -1,6 +1,9 @@
 {
   "hosting": {
     "public": "(public)",
+    "username": "admin",
+    "password_hash": "$2b$10$XXXXXXXXXXXXXXXXXXXX",
+    "role": "super",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -14,3 +17,6 @@
     ]
   }
 }
+
+
+

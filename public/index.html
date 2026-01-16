@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kwara Talent Harvest 6.0</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles/theme.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/mobile.css">
+
+</head>
+<body>
+
+<!-- FLASH POPUP -->
+<div id="flashPopup" class="flash-popup">
+  <div class="flash-content">
+    <strong>🚨 Registration Open — Season 6.0</strong>
+    <p>
+      1. Fill the registration form<br>
+      2. Join contestant WhatsApp group<br>
+      3. Await audition invitation
+    </p>
+    <a href="register.html" class="btn primary">Register Now</a>
+    <span class="close-flash" onclick="closeFlash()">✕</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<header class="nav">
+  <h1>Kwara Talent Harvest</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="vote.html">Vote</a>
+    <a href="register.html" class="btn small">Register</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h2>Kwara Talent Harvest 6.0</h2>
+  <p>Unleashing The Talent In You</p>
+  
+<div class="carousel">
+  <img id="slide" src="images/banner1.jpg">
+</div>
+
+<script>
+const slides = ["banner1.jpg","banner2.jpg","banner3.jpg"];
+let i=0;
+setInterval(()=>{
+  i=(i+1)%slides.length;
+  slide.src="images/"+slides[i];
+},3000);
+</script>
+
+  <div class="hero-actions">
+    <a href="register.html" class="btn primary">Register as Contestant</a>
+    <a href="vote.html" class="btn outline">Vote Now</a>
+  </div>
+</section>
+
+<!--Approved Contestants-->
+<section>
+<h2>Approved Contestants</h2>
+<div id="contestants"></div>
+<a href="vote.html">View All</a>
+</section>
+
+<!-- COMMUNITY -->
+<section class="community">
+  <h3>Join Our Public Community</h3>
+  <p>Get updates, voting alerts, and event info.</p>
+  <a href="https://chat.whatsapp.com/F9ZeBVQxdTW00sNc9sPQDw" target="_blank" class="btn whatsapp">
+    Join WhatsApp Community
+  </a>
+  <a href="https://instagram.com/kwaratalentsharvest">Instagram</a>
+  <a href="https://youtube.com/@parantiproduction">YouTube</a>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <h3>A Platform for Stardom</h3>
+  <p>
+    For over 5 years, Kwara Talent Harvest has discovered and transformed young talents
+    across Kwara State and beyond — music, dance, comedy, modelling, art and more.
+  </p>
+</section>
+
+<!-- SPONSORS -->
+<section class="sponsors">
+  <h3>Our Sponsors</h3>
+  <div class="sponsor-grid">
+    <div class="headline">Kwara State Government <img src="assets/sponsors/kwara-gov.png"> </div>
+    <div>Jimpo ORI</div>
+    <div>Top Star Publishing<img src="assets/sponsors/topstar.png"> </div>
+    <div>Hakiki Studios <img src="assets/sponsors/hakiki.png"> </div>
+    <div>Phursuns Photography</div>
+    <div>Bambi Stylish Staple</div>
+    <div>SharpLinez</div>
+    <div>Queen Deeza Signature</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+© 2026 Kwara Talent Harvest • Powered by Hakiki Studios
+</footer>
+
+<script src="scripts/landing.js"></script>
+</body>
+</html>
