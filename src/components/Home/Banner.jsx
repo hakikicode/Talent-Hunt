@@ -17,7 +17,7 @@ const Banner = () => {
 
   // Set countdown to 15 hours (in milliseconds)
   useEffect(() => {
-    const targetTime = Date.now() + 15 * 60 * 60 * 1000; // 15 hours from now
+    const targetTime = Date.now() + 10 * 60 * 60 * 1000; // 10 hours from now
 
     const interval = setInterval(() => {
       const now = Date.now();
@@ -166,66 +166,41 @@ const Banner = () => {
         </div>
       </div>
 
-{/* Popup Message */}
-{showPopup && (
-  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50">
-    <div className="w-96 p-6 bg-gradient-to-r from-red-600 to-red-800 text-white rounded-lg shadow-2xl ring-4 ring-yellow-400 animate-scale-in relative overflow-y-auto max-h-[90vh]">
-      <button
-        onClick={closePopup}
-        className="absolute top-2 right-2 text-white text-2xl hover:text-yellow-400 transition-transform transform hover:scale-110 focus:outline-none"
-      >
-        ✖
-      </button>
-      <h2 className="text-xl font-extrabold text-center animate-pulse">
-        🚨 SITE UPGRADE & REGISTRATION TIMER 🚨
-      </h2>
-      <p className="mt-4 text-lg font-semibold text-yellow-200 text-center">
-        Registration will open in:
-      </p>
-      <p className="mt-2 text-3xl font-bold text-center text-white">
-        {formatTime(timeLeft)}
-      </p>
-      <p className="mt-4 text-center text-yellow-300 font-semibold text-lg">
-        Please check back soon to register and showcase your talent!
-      </p>
-
-      {/* Registration Instructions */}
-      <div className="mt-6 text-white text-left text-sm space-y-3">
-        <h3 className="font-bold text-lg text-yellow-200">Prepare for Registration:</h3>
-        <p>Register for <b>KWARA Talent Harvest 6.0</b> in 2 Easy Steps:</p>
-        <ol className="list-decimal list-inside space-y-2">
-          <li>
-            <b>Follow us on our social media:</b> Like, comment, and share our posts using <b>#kwaratalentharvest</b> to stay updated on the latest news and developments.
-          </li>
-          <li>
-            <b>Complete your registration:</b> Return to this site after following us to finalize your registration.
-          </li>
-        </ol>
-        <p className="mt-2 font-semibold text-yellow-300">
-          Win Big! By registering, you will be one step closer to winning a cash prize and amazing prizes worth 2 million! Best of luck on your journey to stardom! Don't miss out – register now and take the first step towards achieving your dreams!
-        </p>
-
-        <h4 className="font-bold mt-3 text-yellow-200">Follow Us on Social Media:</h4>
-        <ul className="list-disc list-inside space-y-1">
-          <li>Instagram: <a href="https://instagram.com/kwaratalentharvest" target="_blank" className="text-blue-400 underline">kwaratalentharvest</a></li>
-          <li>TikTok: <a href="https://www.tiktok.com/@kwara_talentsharvest" target="_blank" className="text-blue-400 underline">kwara_talentsharvest</a></li>
-          <li>Facebook: <a href="https://facebook.com/Kwaratalentharvest" target="_blank" className="text-blue-400 underline">Kwaratalentharvest</a></li>
-          <li>YouTube: <a href="https://youtube.com/@parantiproduction" target="_blank" className="text-blue-400 underline">@parantiproduction</a></li>
-          <li>YouTube: <a href="https://youtube.com/@nativenaijatv" target="_blank" className="text-blue-400 underline">@nativenaijatv</a></li>
-        </ul>
-      </div>
-
-      <div className="mt-4 text-center">
-        <button
-          onClick={() => navigate("/vote")}
-          className="inline-flex items-center px-6 py-3 text-sm font-bold text-white uppercase transition-all duration-200 bg-blue-600 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-        >
-          View Past Contestants
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+      {/* Popup Message */}
+      {showPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50">
+          <div className="w-96 p-6 bg-gradient-to-r from-red-600 to-red-800 text-white rounded-lg shadow-2xl ring-4 ring-yellow-400 animate-scale-in relative">
+            <button
+              onClick={closePopup}
+              className="absolute top-2 right-2 text-white text-2xl hover:text-yellow-400 transition-transform transform hover:scale-110 focus:outline-none"
+            >
+              ✖
+            </button>
+            <h2 className="text-xl font-extrabold text-center animate-pulse">
+              🚨 SITE UPGRADE & REGISTRATION TIMER 🚨
+            </h2>
+            <p className="mt-4 text-lg font-semibold text-yellow-200 text-center">
+              Registration will open in:
+            </p>
+            <p className="mt-2 text-3xl font-bold text-center text-white">
+              {formatTime(timeLeft)}
+            </p>
+            <p className="mt-4 text-center text-yellow-300 font-semibold text-lg">
+              Please check back soon to register and showcase your talent!
+            </p>
+            <div className="mt-4 text-center">
+              <h4 className="font-bold mt-3 text-yellow-200">Follow Us on Social Media:</h4>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Instagram: <a href="https://instagram.com/kwaratalentharvest" target="_blank" className="text-blue-400 underline">kwaratalentharvest</a></li>
+                <li>TikTok: <a href="https://www.tiktok.com/@kwara_talentsharvest" target="_blank" className="text-blue-400 underline">kwara_talentsharvest</a></li>
+                <li>Facebook: <a href="https://facebook.com/Kwaratalentharvest" target="_blank" className="text-blue-400 underline">Kwaratalentharvest</a></li>
+                <li>YouTube: <a href="https://youtube.com/@parantiproduction" target="_blank" className="text-blue-400 underline">@parantiproduction</a></li>
+                <li>YouTube: <a href="https://youtube.com/@nativenaijatv" target="_blank" className="text-blue-400 underline">@nativenaijatv</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
