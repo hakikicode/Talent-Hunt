@@ -36,3 +36,49 @@
   .grid span{display:block;margin:5px}
   .hero h1{font-size:28px}
 }
+/* =========================
+   MOBILE SCROLL ADJUSTMENTS
+========================= */
+
+@media (max-width: 600px) {
+
+  .scroll-track img {
+    height: 90px;
+  }
+
+  .scroll-wrapper {
+    margin: 25px 0;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .sponsor img {
+    height: 70px;
+  }
+
+  .sponsor.headline img {
+    height: 110px;
+  }
+
+}
+
+@media (max-width: 600px) {
+  .timeline {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .timeline::before {
+    width: 3px;
+    height: 100%;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+  }
+
+  .timeline li span {
+    margin-bottom: 4px;
+  }
+}

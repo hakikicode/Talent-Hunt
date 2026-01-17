@@ -1,4 +1,4 @@
-import { db, bucket } from "../firebase/setup.js";
+import { db, bucket } from "../public/firebase/setup.js";
 import formidable from "formidable";
 import fs from "fs";
 

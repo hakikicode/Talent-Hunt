@@ -1,4 +1,4 @@
-import { db } from "../firebase/setup.js";
+import { db } from "../public/firebase/setup.js";
 
 export default async function handler(req, res) {
   const { contestant_id, votes, txn_id, phone } = req.body;

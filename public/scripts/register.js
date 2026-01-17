@@ -1,3 +1,6 @@
+import { db } from "../firebase/setup.js";
+import { ref, push } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-database.js";
+
 const questions = [
   { q: "What is your full name?", id: "fullName", type: "text" },
   { q: "Stage name (optional)", id: "stageName", type: "text" },
@@ -22,10 +25,7 @@ const questions = [
   { q: "Instagram username", id: "instagram", type: "text" },
   { q: "Facebook username", id: "facebook", type: "text" },
   { q: "TikTok username", id: "tiktok", type: "text" },
-  { q: "YouTube channel link", id: "youtube", type: "url" },
-
-  { q: "Upload your photo (optional)", id: "photo", type: "file" },
-  { q: "Performance video link (optional)", id: "video", type: "url" }
+  { q: "YouTube channel link", id: "youtube", type: "url" }
 ];
 
 let current = 0;
@@ -40,6 +40,8 @@ document.getElementById("nextBtn").onclick = next;
 
 render();
 
+/* ================= UI ================= */
+
 function render() {
   const step = questions[current];
   questionEl.textContent = step.q;
@@ -51,6 +53,7 @@ function render() {
     input = document.createElement("select");
     step.options.forEach(o => {
       const opt = document.createElement("option");
+      opt.value = o;
       opt.textContent = o;
       input.appendChild(opt);
     });
@@ -59,17 +62,13 @@ function render() {
   else if (step.type === "select-multi") {
     input = document.createElement("select");
     input.multiple = true;
+
     step.options.forEach(o => {
       const opt = document.createElement("option");
+      opt.value = o;
       opt.textContent = o;
       input.appendChild(opt);
     });
-
-    // extra input if "Others"
-    const other = document.createElement("input");
-    other.placeholder = "If Others, specify";
-    other.oninput = e => answers.otherTalent = e.target.value;
-    inputArea.appendChild(other);
   }
 
   else if (step.type === "textarea") {
@@ -81,8 +80,23 @@ function render() {
     input.type = step.type;
   }
 
-  input.value = answers[step.id] || "";
-  input.oninput = e => answers[step.id] = e.target.value;
+  if (answers[step.id]) {
+    if (input.multiple) {
+      [...input.options].forEach(o => {
+        o.selected = answers[step.id].includes(o.value);
+      });
+    } else {
+      input.value = answers[step.id];
+    }
+  }
+
+  input.onchange = () => {
+    if (input.multiple) {
+      answers[step.id] = [...input.selectedOptions].map(o => o.value);
+    } else {
+      answers[step.id] = input.value;
+    }
+  };
 
   inputArea.appendChild(input);
   input.focus();
@@ -106,16 +120,37 @@ function prev() {
   }
 }
 
+/* ================= SUBMIT ================= */
+
 async function submit() {
-  const fd = new FormData();
+  try {
+    const contestantsRef = ref(db, "contestants");
 
-  Object.keys(answers).forEach(k => fd.append(k, answers[k]));
+    await push(contestantsRef, {
+      full_name: answers.fullName || "",
+      stage_name: answers.stageName || "",
+      age: answers.age || "",
+      gender: answers.gender || "",
+      location: answers.location || "",
+      whatsapp: answers.whatsapp || "",
+      talents: answers.talents || [],
+      bio: answers.bio || "",
+      socials: {
+        instagram: answers.instagram || "",
+        facebook: answers.facebook || "",
+        tiktok: answers.tiktok || "",
+        youtube: answers.youtube || ""
+      },
+      status: "pending",
+      votes: 0,
+      created_at: Date.now()
+    });
 
-  const res = await fetch("/api/register", { method: "POST", body: fd });
+    window.location.href =
+      "https://chat.whatsapp.com/IKE91YZa9vnI3e9vRwCSf0";
 
-  if (res.ok) {
-    window.location.href = "https://chat.whatsapp.com/IKE91YZa9vnI3e9vRwCSf0";
-  } else {
-    alert("Submission failed");
+  } catch (err) {
+    console.error(err);
+    alert("Submission failed. Please try again.");
   }
 }
